@@ -60,6 +60,16 @@ public class Map
         return nodeList;
     }
 
+    public Long getLocationByRFID (String rfid) {
+        Long pointID = -1L;
+        for(Node node: nodeList) {
+            if(node.getPointEntity().getTile().getRfid().equals(rfid)){
+                pointID = node.getPointEntity().getId();
+            }
+        }
+        return pointID;
+    }
+
     /**
      * Sets List of map Bots
      * @param botEntities
