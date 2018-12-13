@@ -16,7 +16,7 @@ public class Dijkstra
      * @param sourceId Source ID of Vertex
      * @param vertexes Map Vertices
      */
-    public void computePaths(int sourceId, List<Vertex> vertexes)
+    public void computePaths(Long sourceId, List<Vertex> vertexes)
     {
         Vertex source=getVertexByID(vertexes, sourceId);
         source.setMinDistance(0);
@@ -47,37 +47,6 @@ public class Dijkstra
         }
     }
 
-    /*
-    public void computePathsNG(int sourceId, List<VertexNG> vertexes)
-    {
-        VertexNG source=getVertexByIDNG(vertexes, sourceId);
-        source.setMinDistance(0);
-        Queue<VertexNG> vertexQueue = new LinkedList<>();
-        vertexQueue.add(source);
-        while (!vertexQueue.isEmpty()) {
-            VertexNG u = vertexQueue.poll();
-            VertexNG v = new VertexNG(1L);
-            // Visit each edge exiting u
-            for (EdgeNG e : u.getAdjacencies())
-            {
-                for (VertexNG w : vertexes){
-                    if(Objects.equals(w.getId(), e.getTarget())){
-                        v =w;
-                        break;
-                    }
-                }
-
-                double distanceThroughU = u.getMinDistance() + e.getWeight();
-                if (distanceThroughU < v.getMinDistance()) {
-                    vertexQueue.remove(v);
-
-                    v.setMinDistance(distanceThroughU) ;
-                    v.setPrevious(u);
-                    vertexQueue.add(v);
-                }
-            }
-        }
-    }*/
     /**
      * Calculates shortest path between given Vertex and list of available Vertices
      * Better alternative to arraylist possible?
@@ -85,7 +54,7 @@ public class Dijkstra
      * @param vertexes List of available Vertices
      * @return
      */
-    public Path getShortestPathTo(int targetId, List<Vertex> vertexes)
+    public Path getShortestPathTo(Long targetId, List<Vertex> vertexes)
     {
         Vertex target=getVertexByID(vertexes, targetId);
         List<Vertex> path = new ArrayList<>();
@@ -94,30 +63,13 @@ public class Dijkstra
         Collections.reverse(path);
         return new Path(path);
     }
-    /*
-    public PathNG getShortestPathToNG(int targetId, List<VertexNG> vertexes)
-    {
-        VertexNG target=getVertexByIDNG(vertexes, targetId);
-        List<VertexNG> path = new ArrayList<>();
-        for (VertexNG vertex = target; vertex != null;  vertex = vertex.getPrevious())
-            path.add(vertex);
-        Collections.reverse(path);
-        return new PathNG(path);
-    }*/
 
-    private Vertex getVertexByID(List<Vertex> list, int target){
+    private Vertex getVertexByID(List<Vertex> list, Long target){
         for(Vertex v : list){
             if(v.getId()==target)
                 return v;
         }
         return null;
     }
-    /*
-    private VertexNG getVertexByIDNG(List<VertexNG> list, int target){
-        for(VertexNG v : list){
-            if(v.getId()==target)
-                return v;
-        }
-        return null;
-    }*/
+
 }
