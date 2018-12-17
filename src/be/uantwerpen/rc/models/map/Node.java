@@ -25,6 +25,13 @@ public class Node {
     private List<Link> neighbours;
 
     /**
+     * Default Constructor
+     */
+    public Node(){
+
+    }
+
+    /**
      * Constructor, sets Node ID to Point ID
      * @param pointEntity Point to connect a node to
      */

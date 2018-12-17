@@ -21,7 +21,7 @@ public class Bot
     private Long jobId;
     private Integer percentageCompleted;
     private String workingMode;
-    private int busy;
+    private Boolean busy;
     private Link link;
     private Point point;
     private int status;
@@ -94,9 +94,9 @@ public class Bot
 
     @Basic
     @Column(name = "\"busy\"")
-    public int getBusy() {return busy;}
+    public Boolean getBusy() {return busy;}
 
-    public void setBusy(int busy) {this.busy = busy;}
+    public void setBusy(Boolean busy) {this.busy = busy;}
 
     @Basic
     @Column(name = "\"workingmode\"")
