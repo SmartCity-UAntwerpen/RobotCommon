@@ -64,7 +64,7 @@ public class Map
         rfid = rfid.trim().replace(" ","").toUpperCase();
         Long pointID = -1L;
         for(Node node: nodeList) {
-            if(node.getPointEntity().getTile().getRfid().trim().toUpperCase().equals(rfid)){
+            if(node.getPointEntity().getTile().getRfid().trim().replace(" ","").toUpperCase().equals(rfid)){
                 pointID = node.getPointEntity().getId();
             }
         }
