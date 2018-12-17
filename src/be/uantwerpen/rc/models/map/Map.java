@@ -61,7 +61,7 @@ public class Map
     }
 
     public Long getLocationByRFID (String rfid) {
-        rfid = rfid.trim().toUpperCase();
+        rfid = rfid.trim().replace(" ","").toUpperCase();
         Long pointID = -1L;
         for(Node node: nodeList) {
             if(node.getPointEntity().getTile().getRfid().trim().toUpperCase().equals(rfid)){
