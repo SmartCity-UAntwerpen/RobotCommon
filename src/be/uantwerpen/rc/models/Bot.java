@@ -1,6 +1,7 @@
 package be.uantwerpen.rc.models;
 
 import be.uantwerpen.rc.models.map.Link;
+import be.uantwerpen.rc.models.map.Point;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class Bot
     private String workingMode;
     private int busy;
     private Link link;
+    private Point point;
     private int status;
     private Date lastupdated;
     public Bot(Long coreId){
@@ -135,6 +137,18 @@ public class Bot
         //result = 31 * result + (state != null ? state.hashCode() : 0);
 
         return result;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "\"point\"")
+    public Point getPoint()
+    {
+        return point;
+    }
+
+    public void setPoint(Point point)
+    {
+        this.point = point;
     }
 
     @OneToOne
