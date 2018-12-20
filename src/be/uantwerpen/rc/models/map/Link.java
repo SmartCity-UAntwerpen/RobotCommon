@@ -21,6 +21,7 @@ public class Link {
     @JoinColumn(name="end")
     private Point endPoint;
     private int weight;
+    private int length;
     private double angle;
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -102,5 +103,13 @@ public class Link {
         if(!Objects.equals(id, that.id)) return false;
 
         return true;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 }
