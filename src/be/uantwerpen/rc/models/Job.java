@@ -1,13 +1,18 @@
 package be.uantwerpen.rc.models;
 
+import javax.persistence.*;
+
 /**
  * Job Data Class
  */
+@Entity
+@Table(name = "jobs", catalog = "\"robotDB_new\"")
 public class Job
 {
     /**
      * ID of Job
      */
+    @Id
     private long jobId;
 
     /**
@@ -23,7 +28,9 @@ public class Job
     /**
      * ID of Vehicle
      */
-    private long idVehicle;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="botId")
+    private Bot bot;
 
     /**
      * Job Description?
@@ -96,23 +103,6 @@ public class Job
         this.idEnd = idEnd;
     }
 
-    /**
-     * Get ID of related Job Vehicle
-     * @return ID of Vehicle
-     */
-    public Long getIdVehicle()
-    {
-        return idVehicle;
-    }
-
-    /**
-     * Set ID of Job Vehicle
-     * @param idVehicle ID of vehicle
-     */
-    public void setIdVehicle(Long idVehicle)
-    {
-        this.idVehicle = idVehicle;
-    }
 
     @Override
     public String toString()
@@ -120,5 +110,13 @@ public class Job
         return "Job{" +
                 "jobId=" + jobId +
                 '}';
+    }
+
+    public Bot getBot() {
+        return bot;
+    }
+
+    public void setBot(Bot bot) {
+        this.bot = bot;
     }
 }

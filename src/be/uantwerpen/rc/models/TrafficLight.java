@@ -2,6 +2,7 @@ package be.uantwerpen.rc.models;
 
 
 import be.uantwerpen.rc.models.map.Link;
+import be.uantwerpen.rc.models.map.Point;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -16,15 +17,17 @@ public class TrafficLight
     /**
      * Traffic Light ID
      */
+    @Id
     private Long id;
-    private String direction;
-    private int placeLink;
+    private Long localId; //Traffic light id for the local Raspberry Pi controller
     private String state;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="pointId")
+    private Point point;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="linkId")
     private Link link;
 
-    @Id
-    @Column(name = "\"idtlight\"")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId()
     {
         return id;
@@ -35,20 +38,6 @@ public class TrafficLight
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "direction")
-    public String getDirection()
-    {
-        return direction;
-    }
-
-    public void setDirection(String direction)
-    {
-        this.direction = direction;
-    }
-
-    @Basic
-    @Column(name = "state")
     public String getState()
     {
         return state;
@@ -68,26 +57,11 @@ public class TrafficLight
         TrafficLight that = (TrafficLight) o;
 
         if(!Objects.equals(id, that.id)) return false;
-        if(direction != null ? !direction.equals(that.direction) : that.direction != null) return false;
         if(state != null ? !state.equals(that.state) : that.state != null) return false;
 
         return true;
     }
 
-    @Override
-    public int hashCode()
-    {
-        int result = (int)(id % Integer.MAX_VALUE);
-
-        result = 31 * result + (direction != null ? direction.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
-
-        return result;
-    }
-
-
-    @OneToOne
-    @JoinColumn(name = "\"link\"")
     public Link getLink()
     {
         return link;
@@ -98,15 +72,19 @@ public class TrafficLight
         this.link = link;
     }
 
-    @Basic
-    @Column(name = "\"linkprogress\"")
-    public int getPlaceLink()
-    {
-        return placeLink;
+    public Point getPoint() {
+        return point;
     }
 
-    public void setPlaceLink(int placeLink)
-    {
-        this.placeLink = placeLink;
+    public void setPoint(Point point) {
+        this.point = point;
+    }
+
+    public Long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(Long localId) {
+        this.localId = localId;
     }
 }
