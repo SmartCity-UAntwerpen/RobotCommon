@@ -17,7 +17,7 @@ public class Tile {
 
     private String type;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="lockedBy")
     private Bot lockedBy;
 
