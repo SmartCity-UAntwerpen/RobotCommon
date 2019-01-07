@@ -13,17 +13,17 @@ public class Job
      * ID of Job
      */
     @Id
-    private long jobId;
+    private Long jobId;
 
     /**
      * Start ID of Point(?)
      */
-    private long idStart;
+    private Long idStart;
 
     /**
      * End ID of Point(?)
      */
-    private long idEnd;
+    private Long idEnd;
 
     /**
      * ID of Vehicle
@@ -32,9 +32,6 @@ public class Job
     @JoinColumn(name="botId")
     private Bot bot;
 
-    /**
-     * Job Description?
-     */
     public Job()
     {
         this.jobId = 0L;
@@ -47,6 +44,12 @@ public class Job
     public Job(Long jobId)
     {
         this.jobId = jobId;
+    }
+
+    public Job(Long jobId, Long idStart, Long idEnd) {
+        this.jobId = jobId;
+        this.idStart = idStart;
+        this.idEnd = idEnd;
     }
 
     /**

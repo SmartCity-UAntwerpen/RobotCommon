@@ -60,6 +60,15 @@ public class Map
         return nodeList;
     }
 
+    public Point getPointById(Long id) {
+        for(Node node: nodeList) {
+            if(node.getPointEntity().getId().equals(id)) {
+                return node.getPointEntity();
+            }
+        }
+        return null;
+    }
+
     public Long getLocationByRFID (String rfid) {
         rfid = rfid.trim().replace(" ","").toUpperCase();
         Long pointID = -1L;
