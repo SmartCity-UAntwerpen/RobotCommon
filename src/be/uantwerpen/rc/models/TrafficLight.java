@@ -19,14 +19,10 @@ public class TrafficLight
      */
     @Id
     private Long id;
-    private Long localId; //Traffic light id for the local Raspberry Pi controller
     private String state;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="pointId")
     private Point point;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="linkId")
-    private Link link;
 
     public Long getId()
     {
@@ -62,16 +58,6 @@ public class TrafficLight
         return true;
     }
 
-    public Link getLink()
-    {
-        return link;
-    }
-
-    public void setLink(Link link)
-    {
-        this.link = link;
-    }
-
     public Point getPoint() {
         return point;
     }
@@ -80,11 +66,4 @@ public class TrafficLight
         this.point = point;
     }
 
-    public Long getLocalId() {
-        return localId;
-    }
-
-    public void setLocalId(Long localId) {
-        this.localId = localId;
-    }
 }
