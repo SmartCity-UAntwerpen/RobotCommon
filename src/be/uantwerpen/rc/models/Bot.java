@@ -22,8 +22,8 @@ public class Bot
     private Integer percentageCompleted;
     private String workingMode;
     private Boolean busy;
-    private Link link;
-    private Point point;
+    private Long link;
+    private Long point;
     private int status;
     private Date lastupdated;
     public Bot(Long coreId){
@@ -139,26 +139,22 @@ public class Bot
         return result;
     }
 
-    @OneToOne
-    @JoinColumn(name = "\"point\"")
-    public Point getPoint()
+    public Long getPoint()
     {
         return point;
     }
 
-    public void setPoint(Point point)
+    public void setPoint(Long point)
     {
         this.point = point;
     }
 
-    @OneToOne
-    @JoinColumn(name = "\"link\"")
-    public Link getLinkId()
+    public Long getLinkId()
     {
         return link;
     }
 
-    public void setLinkId(Link link)
+    public void setLinkId(Long link)
     {
         this.link = link;
     }
