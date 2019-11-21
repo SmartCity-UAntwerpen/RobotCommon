@@ -1,8 +1,5 @@
 package be.uantwerpen.rc.models;
 
-import be.uantwerpen.rc.models.map.Link;
-import be.uantwerpen.rc.models.map.Point;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
