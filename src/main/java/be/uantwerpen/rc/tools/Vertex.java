@@ -32,6 +32,7 @@ public class Vertex
      */
     private Vertex previous;
 
+
     /**
      * Create Vertex linking to node
      * @param node

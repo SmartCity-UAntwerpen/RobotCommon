@@ -84,8 +84,8 @@ public class Link {
     }
 
     public void lockLink(Boolean status, Bot lockedBy){
-        lock.setStatus(status);
-        lock.setLockedBy(lockedBy);
+        this.lock.setStatus(status);
+        this.lock.setLockedBy(lockedBy);
     }
 
     public Boolean getLockStatus(){

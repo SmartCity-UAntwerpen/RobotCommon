@@ -11,7 +11,7 @@ public class Point {
     @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="tileId")
     private Tile tile;
 

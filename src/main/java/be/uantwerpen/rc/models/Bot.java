@@ -21,6 +21,7 @@ public class Bot
     private Boolean busy;
     private Long link;
     private Long point;
+    private Long idLocation;
     private int status;
     private Date lastupdated;
     public Bot(Long coreId){
@@ -105,6 +106,16 @@ public class Bot
     public void setWorkingMode(String state)
     {
         this.workingMode = state;
+    }
+
+    @Basic
+    @Column(name="\"location\"")
+    public Long getIdLocation() {
+        return idLocation;
+    }
+
+    public void setIdLocation(Long idLocation) {
+        this.idLocation = idLocation;
     }
 
     @Override

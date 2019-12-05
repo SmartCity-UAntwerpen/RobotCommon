@@ -3,6 +3,7 @@ package be.uantwerpen.rc.tools.pathplanning;
 import be.uantwerpen.rc.models.map.Path;
 import be.uantwerpen.rc.tools.Edge;
 import be.uantwerpen.rc.tools.Vertex;
+import org.slf4j.Logger;
 
 import java.util.*;
 
@@ -19,32 +20,57 @@ public class Dijkstra
     public void computePaths(Long sourceId, List<Vertex> vertexes)
     {
         Vertex source=getVertexByID(vertexes, sourceId);
-        source.setMinDistance(0);
-        Queue<Vertex> vertexQueue = new LinkedList<>();
-        vertexQueue.add(source);
-        while (!vertexQueue.isEmpty()) {
-            Vertex u = vertexQueue.poll();
-            Vertex v = new Vertex(1L);
-            // Visit each edge exiting u
-            for (Edge e : u.getAdjacencies())
-            {
-                for (Vertex w : vertexes){
-                    if(Objects.equals(w.getId(), e.getTarget())){
-                        v =w;
-                        break;
+        if(source != null)
+        {
+            source.setMinDistance(0.0);
+            Queue<Vertex> vertexQueue = new LinkedList<>();
+            vertexQueue.add(source);
+            while (!vertexQueue.isEmpty()) {
+                Vertex u = vertexQueue.poll();
+                Vertex v = new Vertex(1L);
+                // Visit each edge exiting u
+                for (Edge e : u.getAdjacencies()) {
+                    for (Vertex w : vertexes) {
+                        if (Objects.equals(w.getId(), e.getTarget())) {
+                            v = w;
+                            break;
+                        }
                     }
-                }
 
-                double distanceThroughU = u.getMinDistance() + e.getWeight();
-                if (distanceThroughU < v.getMinDistance()) {
-                    vertexQueue.remove(v);
+                    double distanceThroughU = u.getMinDistance() + e.getWeight();
+                    if (distanceThroughU < v.getMinDistance()) {
+                        vertexQueue.remove(v);
 
-                    v.setMinDistance(distanceThroughU) ;
-                    v.setPrevious(u);
-                    vertexQueue.add(v);
+                        v.setMinDistance(distanceThroughU);
+                        v.setPrevious(u);
+                        vertexQueue.add(v);
+                    }
                 }
             }
         }
+        else
+        {
+            System.err.println("Error calculating path using Dijkstra");
+            //TODO: use better error handling (logging?)
+        }
+    }
+
+    /**
+     * Computes Dijkstra path based on Source Vertex and list of possible Vertices to visit
+     * @param sourceId Source ID of Vertex
+     * @param vertexes Map Vertices
+     */
+    public void computePaths_New(Long sourceId, List<Vertex> vertexes)
+    {
+        Vertex sourceVertex = this.getVertexByID(vertexes, sourceId);
+        if(sourceVertex != null)
+        {
+            sourceVertex.setMinDistance(0.0);
+            List<Vertex> shortestPathTreeList = new ArrayList<>();
+
+        }
+
+
     }
 
     /**
@@ -66,7 +92,7 @@ public class Dijkstra
 
     private Vertex getVertexByID(List<Vertex> list, Long target){
         for(Vertex v : list){
-            if(v.getId()==target)
+            if(v.getId().equals(target))
                 return v;
         }
         return null;
