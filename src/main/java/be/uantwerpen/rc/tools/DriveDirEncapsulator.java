@@ -5,17 +5,24 @@ import java.util.List;
 
 public class DriveDirEncapsulator {
     private List<DriveDir> driveDirs;
-    public DriveDirEncapsulator() {
+
+    public DriveDirEncapsulator()
+    {
         driveDirs=new ArrayList<>();
     }
-    public DriveDirEncapsulator(List<DriveDir>driveDirs) {
+
+    public DriveDirEncapsulator(List<DriveDir>driveDirs)
+    {
         this.driveDirs=driveDirs;
     }
-    public void addDriveDir(DriveDir driveDir){
+
+    public void addDriveDir(DriveDir driveDir)
+    {
         driveDirs.add(driveDir);
     }
 
-    public List<DriveDir> getDriveDirs() {
+    public List<DriveDir> getDriveDirs()
+    {
         return driveDirs;
     }
 }

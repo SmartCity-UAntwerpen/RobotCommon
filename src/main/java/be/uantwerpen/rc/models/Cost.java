@@ -1,16 +1,30 @@
 package be.uantwerpen.rc.models;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 /**
  * Cost Data Class
- * TODO
+ * TODO: implement class
  */
+@Embeddable
 public class Cost {
+
+    @Transient
     private boolean status;
     private double weightToStart;
     private double weight;
+    private double length;
+    @Transient
     private long idVehicle;
 
-    public Cost(){
+    public Cost()
+    {
+        this.status = false;
+        this.weightToStart = 0.0;
+        this.weight = 0.0;
+        this.length = 0.0;
+        this.idVehicle = 0;
 
     }
 
@@ -44,6 +58,14 @@ public class Cost {
         this.weight = w;
     }
 
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
     public Long getIdVehicle()
     {
         return idVehicle;
@@ -52,5 +74,10 @@ public class Cost {
     public void setIdVehicle(Long id)
     {
         this.idVehicle = id;
+    }
+
+    public Long getTotalCost()
+    {
+        return null;
     }
 }

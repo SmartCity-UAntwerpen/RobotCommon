@@ -1,6 +1,5 @@
 package be.uantwerpen.rc.models.map;
 
-import be.uantwerpen.rc.tools.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +10,9 @@ import java.util.List;
  */
 public class Path {
 
-    private List<Vertex> path;
+    private List<Point> path;
 
-    public Path(List<Vertex> path) {
+    public Path(List<Point> path) {
         this.path = path;
     }
 
@@ -22,10 +21,10 @@ public class Path {
     }
 
     public double getWeight(){
-       return path.get(path.size()-1).getMinDistance();
+        return path.get(path.size()-1).getMinDistance();
     }
-    public void addVertex(Vertex vertex){this.path.add(vertex);}
-    public List<Vertex> getPath() {
+    public void addVertex(Point vertex){this.path.add(vertex);}
+    public List<Point> getPath() {
         return path;
     }
 }

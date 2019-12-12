@@ -8,5 +8,7 @@ public enum DriveDirEnum {
     LEFT,
     RIGHT,
     FOLLOW,
-    TURN
+    TURN,
+    LONGDRIVE,
+    NONE
 }

@@ -1,7 +1,7 @@
 package be.uantwerpen.rc.tools.pathplanning;
 
-import be.uantwerpen.rc.models.map.Path;
 import be.uantwerpen.rc.models.map.Map;
+import be.uantwerpen.rc.models.map.Path;
 
 /**
  * Path Planning interface TODO

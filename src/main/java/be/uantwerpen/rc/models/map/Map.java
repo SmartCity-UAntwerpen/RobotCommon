@@ -15,7 +15,7 @@ public class Map
     /**
      * List of nodes on map
      */
-    private List<Node> nodeList;
+    private List<Point> pointList;
 
     /**
      * List of bots on map
@@ -31,39 +31,39 @@ public class Map
      * Default Constructor
      */
     public Map(){
-        nodeList = new ArrayList<>();
+        pointList = new ArrayList<>();
         botEntities = new ArrayList<>();
     }
 
     /**
-     * Adds Node to map
-     * @param node node to map
+     * Adds Point to map
+     * @param point point to map
      */
-    public void addNode(Node node){
-        nodeList.add(node);
+    public void addPoint(Point point){
+        pointList.add(point);
     }
 
     /**
-     * Sets List of map nodes
-     * @param nodeList list of nodes to set
+     * Sets List of map points
+     * @param pointList list of points to set
      */
-    public void setNodeList(List<Node> nodeList) {
-        this.nodeList = nodeList;
+    public void setPointList(List<Point> pointList) {
+        this.pointList = pointList;
     }
 
     /**
-     * Gets list of map nodes
-     * @return list of nodes
+     * Gets list of map points
+     * @return list of points
      */
-    public List<Node> getNodeList()
+    public List<Point> getPointList()
     {
-        return nodeList;
+        return pointList;
     }
 
     public Point getPointById(Long id) {
-        for(Node node: nodeList) {
-            if(node.getPointEntity().getId().equals(id)) {
-                return node.getPointEntity();
+        for(Point point: pointList) {
+            if(point.getId().equals(id)) {
+                return point;
             }
         }
         return null;
@@ -72,9 +72,9 @@ public class Map
     public Long getLocationByRFID (String rfid) {
         rfid = rfid.trim().replace(" ","").toUpperCase();
         Long pointID = -1L;
-        for(Node node: nodeList) {
-            if(node.getPointEntity().getTile().getRfid().trim().replace(" ","").toUpperCase().equals(rfid)){
-                pointID = node.getPointEntity().getId();
+        for(Point point: pointList) {
+            if(point.getTile().getRfid().trim().replace(" ","").toUpperCase().equals(rfid)){
+                pointID = point.getId();
             }
         }
         return pointID;
@@ -115,7 +115,7 @@ public class Map
     @Override
     public String toString() {
         return "AbstractMap{" +
-                "nodeList=" + nodeList +
+                "pointList=" + pointList +
                 ", botEntities=" + botEntities +
                 ", trafficlightEntity=" + trafficlightEntity +
                 '}';

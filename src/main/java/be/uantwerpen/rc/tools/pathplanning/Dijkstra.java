@@ -1,9 +1,10 @@
 package be.uantwerpen.rc.tools.pathplanning;
 
+import be.uantwerpen.rc.models.map.Link;
 import be.uantwerpen.rc.models.map.Path;
-import be.uantwerpen.rc.tools.Edge;
-import be.uantwerpen.rc.tools.Vertex;
+import be.uantwerpen.rc.models.map.Point;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -12,38 +13,40 @@ import java.util.*;
  */
 public class Dijkstra
 {
+
+    private Logger logger = LoggerFactory.getLogger(Dijkstra.class);
+
     /**
-     * Computes Dijkstra path based on Source Vertex and list of possible Vertices to visit
+     * Computes Dijkstra path based on Source point and list of possible Points to visit
      * @param sourceId Source ID of Vertex
-     * @param vertexes Map Vertices
+     * @param allMapVertices Map Vertices
      */
-    public void computePaths(Long sourceId, List<Vertex> vertexes)
+    public void computePaths(Long sourceId, List<Point> allMapVertices)
     {
-        Vertex source=getVertexByID(vertexes, sourceId);
+        Point source = getVertexByID(allMapVertices, sourceId);
         if(source != null)
         {
             source.setMinDistance(0.0);
-            Queue<Vertex> vertexQueue = new LinkedList<>();
-            vertexQueue.add(source);
-            while (!vertexQueue.isEmpty()) {
-                Vertex u = vertexQueue.poll();
-                Vertex v = new Vertex(1L);
-                // Visit each edge exiting u
-                for (Edge e : u.getAdjacencies()) {
-                    for (Vertex w : vertexes) {
-                        if (Objects.equals(w.getId(), e.getTarget())) {
-                            v = w;
-                            break;
+            Queue<Point> unVisitedVerticesQueue = new LinkedList<>();
+            unVisitedVerticesQueue.add(source);
+            while (!unVisitedVerticesQueue.isEmpty()) {
+                Point u = unVisitedVerticesQueue.poll();
+                // Visit each link exiting u
+                for (Link linkOfU : u.getNeighbours()) {
+                    Point targetVertexOfLink = linkOfU.getEndPoint();
+                    for (Point w : allMapVertices) {
+                        if (targetVertexOfLink.getId().equals(w.getId())) { // every point should have a unique id
+                            targetVertexOfLink = w;
                         }
                     }
 
-                    double distanceThroughU = u.getMinDistance() + e.getWeight();
-                    if (distanceThroughU < v.getMinDistance()) {
-                        vertexQueue.remove(v);
+                    double distanceThroughU = u.getMinDistance() + linkOfU.getCost().getWeight();
+                    if (distanceThroughU < targetVertexOfLink.getMinDistance()) {
+                        unVisitedVerticesQueue.remove(u);
 
-                        v.setMinDistance(distanceThroughU);
-                        v.setPrevious(u);
-                        vertexQueue.add(v);
+                        targetVertexOfLink.setMinDistance(distanceThroughU);
+                        targetVertexOfLink.setPrevious(u);
+                        unVisitedVerticesQueue.add(targetVertexOfLink);
                     }
                 }
             }
@@ -51,26 +54,8 @@ public class Dijkstra
         else
         {
             System.err.println("Error calculating path using Dijkstra");
-            //TODO: use better error handling (logging?)
+            logger.error("Error calculating path using Dijkstra");
         }
-    }
-
-    /**
-     * Computes Dijkstra path based on Source Vertex and list of possible Vertices to visit
-     * @param sourceId Source ID of Vertex
-     * @param vertexes Map Vertices
-     */
-    public void computePaths_New(Long sourceId, List<Vertex> vertexes)
-    {
-        Vertex sourceVertex = this.getVertexByID(vertexes, sourceId);
-        if(sourceVertex != null)
-        {
-            sourceVertex.setMinDistance(0.0);
-            List<Vertex> shortestPathTreeList = new ArrayList<>();
-
-        }
-
-
     }
 
     /**
@@ -80,18 +65,18 @@ public class Dijkstra
      * @param vertexes List of available Vertices
      * @return
      */
-    public Path getShortestPathTo(Long targetId, List<Vertex> vertexes)
+    public Path getShortestPathTo(Long targetId, List<Point> vertexes)
     {
-        Vertex target=getVertexByID(vertexes, targetId);
-        List<Vertex> path = new ArrayList<>();
-        for (Vertex vertex = target; vertex != null;  vertex = vertex.getPrevious())
+        Point target=getVertexByID(vertexes, targetId);
+        List<Point> path = new ArrayList<>();
+        for (Point vertex = target; vertex != null;  vertex = vertex.getPrevious())
             path.add(vertex);
         Collections.reverse(path);
         return new Path(path);
     }
 
-    private Vertex getVertexByID(List<Vertex> list, Long target){
-        for(Vertex v : list){
+    private Point getVertexByID(List<Point> list, Long target){
+        for(Point v : list){
             if(v.getId().equals(target))
                 return v;
         }

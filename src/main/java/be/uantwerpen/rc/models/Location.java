@@ -1,7 +1,5 @@
 package be.uantwerpen.rc.models;
 
-import be.uantwerpen.rc.models.map.Point;
-
 import javax.persistence.*;
 
 /**
@@ -18,12 +16,14 @@ public class Location {
      */
     @Id
     private long id;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="start")
-    private Point startID;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="stop")
-    private Point stopID;
+
+    //@OneToOne(fetch = FetchType.EAGER, targetEntity = Long.class)
+    //@JoinColumn(name="start")
+    private Long startID;
+
+    //@OneToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name="stop")
+    private Long stopID;
     private long percentage;
     private long vehicleID;
 
@@ -39,19 +39,19 @@ public class Location {
         this.id = id;
     }
 
-    public Point getStartID() {
+    public Long getStartID() {
         return startID;
     }
 
-    public void setStartID(Point startID) {
+    public void setStartID(Long startID) {
         this.startID = startID;
     }
 
-    public Point getStopID() {
+    public Long getStopID() {
         return stopID;
     }
 
-    public void setStopID(Point stopID) {
+    public void setStopID(Long stopID) {
         this.stopID = stopID;
     }
 

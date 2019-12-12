@@ -2,6 +2,7 @@ package be.uantwerpen.rc.models.map;
 
 
 import be.uantwerpen.rc.models.Bot;
+import be.uantwerpen.rc.models.Cost;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,15 +21,34 @@ public class Link {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="end")
     private Point endPoint;
-    private int weight;
-    private int length;
+
+    private Cost cost;
     private double angle;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="linkLockId")
     private LinkLock lock;
 
-    public Link(){}
+    public Link()
+    {
+        this.id = 0L;
+        this.startPoint = new Point();
+        this.endPoint = new Point();
+        this.cost = new Cost();
+        this.angle = 0.0;
+        this.lock = new LinkLock();
+    }
+
+    public Link(Long targetId, Double weight)
+    {
+        this.id = targetId;
+        this.startPoint = new Point();
+        this.endPoint = new Point();
+        this.cost = new Cost();
+        this.cost.setWeight(weight);
+        this.angle = 0.0;
+        this.lock = new LinkLock();
+    }
 
     public Long getId() {
         return id;
@@ -59,12 +79,12 @@ public class Link {
         this.endPoint = endPoint;
     }
 
-    public int getWeight() {
-        return weight;
+    public Cost getCost() {
+        return cost;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setCost(Cost cost) {
+        this.cost = cost;
     }
 
     public double getAngle() {
@@ -105,11 +125,15 @@ public class Link {
         return true;
     }
 
-    public int getLength() {
-        return length;
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public Long getTarget() {
+        return this.endPoint.getId();
+    }
+
+    public void setTarget(Long target) {
+        this.endPoint.setId(target);
     }
 }

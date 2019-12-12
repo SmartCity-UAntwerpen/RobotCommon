@@ -3,6 +3,7 @@ package be.uantwerpen.rc.models.map;
 import be.uantwerpen.rc.models.Bot;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "points", catalog = "\"robotDB_new\"")
@@ -15,7 +16,24 @@ public class Point {
     @JoinColumn(name="tileId")
     private Tile tile;
 
+    /**
+     * List of neighbouring Links (from which this point is a start/end point) (currently not in db)
+     */
+    @Transient
+    private List<Link> neighbours;
+
+    private double minDistance = Double.POSITIVE_INFINITY;
+
+    @OneToOne
+    @JoinColumn(name="previousPoint")
+    private Point previous;
+
     public Point(){}
+
+    public Point(Long id)
+    {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -40,5 +58,37 @@ public class Point {
 
     public boolean getTileLock(){
         return tile.getLocked();
+    }
+
+    public List<Link> getNeighbours() {
+        return neighbours;
+    }
+
+    public void setNeighbours(List<Link> neighbours) {
+        this.neighbours = neighbours;
+    }
+
+    public double getMinDistance() {
+        return minDistance;
+    }
+
+    public void setMinDistance(double minDistance) {
+        this.minDistance = minDistance;
+    }
+
+    public Point getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Point previous) {
+        this.previous = previous;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "nodeId=" + this.id +
+                ", neighbours=" + neighbours +
+                '}';
     }
 }
