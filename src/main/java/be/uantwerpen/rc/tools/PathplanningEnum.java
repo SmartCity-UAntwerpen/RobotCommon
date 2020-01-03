@@ -1,0 +1,12 @@
+package be.uantwerpen.rc.tools;
+
+/**
+ * Created by Arthur on 24/04/2016.
+ */
+public enum PathplanningEnum {
+    DIJKSTRA,
+    //SERVER,
+    RANDOM,
+    TERMINAL
+}
+

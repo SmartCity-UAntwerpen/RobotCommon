@@ -33,7 +33,7 @@ public class Dijkstra
                 Point u = unVisitedVerticesQueue.poll();
                 // Visit each link exiting u
                 for (Link linkOfU : u.getNeighbours()) {
-                    Point targetVertexOfLink = linkOfU.getEndPoint();
+                    Point targetVertexOfLink = new Point(linkOfU.getEndPoint());
                     for (Point w : allMapVertices) {
                         if (targetVertexOfLink.getId().equals(w.getId())) { // every point should have a unique id
                             targetVertexOfLink = w;

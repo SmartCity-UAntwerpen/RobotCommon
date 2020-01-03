@@ -1,18 +1,29 @@
 package be.uantwerpen.rc.tools;
 
+import javax.persistence.*;
+
 /**
  * Created by Arthur on 28/04/2016.
  *
- * @Author Riad on 12/12/2019
+ * @Author Riad on 17/12/2019
  */
+//@Embeddable
+@Entity
+@Table(name="drivedirs", catalog = "\"robotDB_new\"")
 public class DriveDir{
 
+    @Id
+    private Long driveId;
+
+    @Enumerated
     private DriveDirEnum dir;
+
     private double angle;
     private String command;
 
     public DriveDir()
     {
+        this.driveId = 0L;
         this.dir = DriveDirEnum.NONE;
         this.angle = 0.0;
         this.command = "MISSING";
@@ -21,6 +32,7 @@ public class DriveDir{
 
     public DriveDir(DriveDirEnum dir)
     {
+        this.driveId = 0L;
         this.angle = 0.0;
         this.dir = dir;
         command = "MISSING";
@@ -28,6 +40,7 @@ public class DriveDir{
 
     public DriveDir(DriveDirEnum dir, double angle)
     {
+        this.driveId = 0L;
         this.dir = dir;
         this.angle = angle;
         this.command = "MISSING";
@@ -35,6 +48,7 @@ public class DriveDir{
 
     public DriveDir(String command)
     {
+        this.driveId = 0L;
         this.dir = DriveDirEnum.NONE;
         this.command = command;
         this.angle = 0.0;
@@ -42,13 +56,15 @@ public class DriveDir{
 
     public DriveDir(String command, double angle)
     {
+        this.driveId = 0L;
         this.dir = DriveDirEnum.NONE;
         this.angle = angle;
-        this.command = "MISSING";
+        this.command = command;
     }
 
     public DriveDir(DriveDirEnum dir, double angle, String command)
     {
+        this.driveId = 0L;
         this.dir = dir;
         this.angle = angle;
         this.command = command;
@@ -98,5 +114,13 @@ public class DriveDir{
 
     public void setCommand(String command) {
         this.command = command;
+    }
+
+    public Long getDriveId() {
+        return driveId;
+    }
+
+    public void setDriveId(Long driveId) {
+        this.driveId = driveId;
     }
 }

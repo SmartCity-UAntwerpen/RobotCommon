@@ -12,7 +12,9 @@ import java.util.Random;
 @Table(name = "robots",catalog = "\"robotDB_new\"")
 public class Bot
 {
+    @Id
     private Long idCore;
+
     private Long idStart;
     private Long idStop;
     private Long jobId;

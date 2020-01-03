@@ -1,6 +1,11 @@
 package be.uantwerpen.rc.models;
 
+import be.uantwerpen.rc.tools.DriveDir;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Job Data Class
@@ -32,9 +37,29 @@ public class Job
     @JoinColumn(name="botId")
     private Bot bot;
 
+    //@Transient
+    @ElementCollection(fetch = FetchType.LAZY)
+    //@CollectionTable(name="drivedirections", joinColumns = @JoinColumn(name="id"))
+    /*@AttributeOverrides({
+            @AttributeOverride(name="dir", column=@Column(name="direction")),
+            @AttributeOverride(name="angle", column = @Column(name="directionAngle")),
+            @AttributeOverride(name="command", column = @Column(name="directionCommand"))
+    })*/
+    //@OneToMany(fetch = FetchType.EAGER)
+    /*@JoinTable(
+            name="drivedirections",
+            joinColumns={
+                    @JoinColumn(name="driveId", referencedColumnName="id")},
+            inverseJoinColumns={
+                    @JoinColumn(name="jobId", referencedColumnName="id")})*/
+/*    @OneToMany(fetch = FetchType.LAZY)*/
+    @JoinColumn(name="driveId")
+    private List<DriveDir> driveDirections;
+
     public Job()
     {
         this.jobId = 0L;
+        this.driveDirections = new LinkedList<>();
     }
 
     /**
@@ -44,12 +69,15 @@ public class Job
     public Job(Long jobId)
     {
         this.jobId = jobId;
+        this.driveDirections = new LinkedList<>();
     }
 
-    public Job(Long jobId, Long idStart, Long idEnd) {
+    public Job(Long jobId, Long idStart, Long idEnd)
+    {
         this.jobId = jobId;
         this.idStart = idStart;
         this.idEnd = idEnd;
+        this.driveDirections = new LinkedList<>();
     }
 
     /**
@@ -121,5 +149,15 @@ public class Job
 
     public void setBot(Bot bot) {
         this.bot = bot;
+    }
+
+
+
+    public List<DriveDir> getDriveDirections() {
+        return driveDirections;
+    }
+
+    public void setDriveDirections(ArrayList<DriveDir> driveDirections) {
+        this.driveDirections = driveDirections;
     }
 }

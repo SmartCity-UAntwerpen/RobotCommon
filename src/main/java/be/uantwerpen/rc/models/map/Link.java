@@ -16,11 +16,11 @@ public class Link {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="start")
-    private Point startPoint;
+    private Long startPoint;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="end")
-    private Point endPoint;
+    private Long endPoint;
 
     private Cost cost;
     private double angle;
@@ -32,8 +32,8 @@ public class Link {
     public Link()
     {
         this.id = 0L;
-        this.startPoint = new Point();
-        this.endPoint = new Point();
+        this.startPoint = 0L;
+        this.endPoint = 0L;
         this.cost = new Cost();
         this.angle = 0.0;
         this.lock = new LinkLock();
@@ -42,8 +42,8 @@ public class Link {
     public Link(Long targetId, Double weight)
     {
         this.id = targetId;
-        this.startPoint = new Point();
-        this.endPoint = new Point();
+        this.startPoint = 0L;
+        this.endPoint = 0L;
         this.cost = new Cost();
         this.cost.setWeight(weight);
         this.angle = 0.0;
@@ -61,21 +61,21 @@ public class Link {
 
     @OneToOne
     @JoinColumn(name = "\"start\"")
-    public Point getStartPoint() {
+    public Long getStartPoint() {
         return startPoint;
     }
 
-    public void setStartPoint(Point startPoint) {
+    public void setStartPoint(Long startPoint) {
         this.startPoint = startPoint;
     }
 
     @OneToOne
     @JoinColumn(name = "\"end\"")
-    public Point getEndPoint() {
+    public Long getEndPoint() {
         return endPoint;
     }
 
-    public void setEndPoint(Point endPoint) {
+    public void setEndPoint(Long endPoint) {
         this.endPoint = endPoint;
     }
 
@@ -89,10 +89,6 @@ public class Link {
 
     public double getAngle() {
         return angle;
-    }
-
-    public void setAngle(int angle) {
-        this.angle = angle;
     }
 
     public LinkLock getLock() {
@@ -130,10 +126,10 @@ public class Link {
     }
 
     public Long getTarget() {
-        return this.endPoint.getId();
+        return this.endPoint;
     }
 
     public void setTarget(Long target) {
-        this.endPoint.setId(target);
+        this.endPoint = target;
     }
 }

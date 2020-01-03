@@ -22,7 +22,9 @@ public class Point {
     @Transient
     private List<Link> neighbours;
 
-    private double minDistance = Double.POSITIVE_INFINITY;
+    //@Column(columnDefinition = "double default = 100000.0")
+    private double minDistance = 1000000.0;
+    //private double minDistance = Double.POSITIVE_INFINITY;
 
     @OneToOne
     @JoinColumn(name="previousPoint")
