@@ -36,9 +36,9 @@ public class Job
     @JoinColumn(name="botId")
     private Bot bot;
 
-    //@Transient
+    @Transient
     //@ElementCollection(fetch = FetchType.EAGER)
-    @OneToMany(cascade = CascadeType.PERSIST)
+    //@OneToMany(cascade = CascadeType.PERSIST)
     //@CollectionTable(name="drivedirections", joinColumns = @JoinColumn(name="id"))
     /*@AttributeOverrides({
             @AttributeOverride(name="dir", column=@Column(name="direction")),
