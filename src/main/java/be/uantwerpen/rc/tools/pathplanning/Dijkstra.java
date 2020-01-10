@@ -37,6 +37,7 @@ public class Dijkstra
                     for (Point w : allMapVertices) {
                         if (targetVertexOfLink.getId().equals(w.getId())) { // every point should have a unique id
                             targetVertexOfLink = w;
+                            break;
                         }
                     }
 

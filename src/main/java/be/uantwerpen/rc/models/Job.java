@@ -3,7 +3,6 @@ package be.uantwerpen.rc.models;
 import be.uantwerpen.rc.tools.DriveDir;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +37,8 @@ public class Job
     private Bot bot;
 
     //@Transient
-    @ElementCollection(fetch = FetchType.LAZY)
+    //@ElementCollection(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST)
     //@CollectionTable(name="drivedirections", joinColumns = @JoinColumn(name="id"))
     /*@AttributeOverrides({
             @AttributeOverride(name="dir", column=@Column(name="direction")),
@@ -54,7 +54,7 @@ public class Job
                     @JoinColumn(name="jobId", referencedColumnName="id")})*/
 /*    @OneToMany(fetch = FetchType.LAZY)*/
     @JoinColumn(name="driveId")
-    private List<DriveDir> driveDirections;
+    private List<DriveDir> driveDirections = new LinkedList<>();
 
     public Job()
     {
@@ -157,7 +157,7 @@ public class Job
         return driveDirections;
     }
 
-    public void setDriveDirections(ArrayList<DriveDir> driveDirections) {
+    public void setDriveDirections(List<DriveDir> driveDirections) {
         this.driveDirections = driveDirections;
     }
 }

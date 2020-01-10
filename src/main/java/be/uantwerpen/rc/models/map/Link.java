@@ -14,12 +14,14 @@ public class Link {
     @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="start")
+    //@OneToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name="start")
+    @Column(name = "start")
     private Long startPoint;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="end")
+    //@OneToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name="end")
+    @Column(name = "end")
     private Long endPoint;
 
     private Cost cost;
@@ -59,8 +61,8 @@ public class Link {
     }
 
 
-    @OneToOne
-    @JoinColumn(name = "\"start\"")
+    //@OneToOne
+    //@JoinColumn(name = "\"start\"")
     public Long getStartPoint() {
         return startPoint;
     }
@@ -69,8 +71,8 @@ public class Link {
         this.startPoint = startPoint;
     }
 
-    @OneToOne
-    @JoinColumn(name = "\"end\"")
+    //@OneToOne
+    //@JoinColumn(name = "\"end\"")
     public Long getEndPoint() {
         return endPoint;
     }

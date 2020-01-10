@@ -15,7 +15,7 @@ public class DriveDir{
     @Id
     private Long driveId;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private DriveDirEnum dir;
 
     private double angle;
@@ -35,7 +35,7 @@ public class DriveDir{
         this.driveId = 0L;
         this.angle = 0.0;
         this.dir = dir;
-        command = "MISSING";
+        this.command = "MISSING";
     }
 
     public DriveDir(DriveDirEnum dir, double angle)
@@ -80,9 +80,9 @@ public class DriveDir{
             case FORWARD:
                 return "DRIVE FORWARD 120";
             case LEFT:
-                return "DRIVE TURN L" + this.angle;
+                return "DRIVE TURN L " + this.angle;
             case RIGHT:
-                return "DRIVE TURN R" + this.angle;
+                return "DRIVE TURN R " + this.angle;
             case FOLLOW:
                 return "DRIVE FOLLOWLINE";
             case TURN:
