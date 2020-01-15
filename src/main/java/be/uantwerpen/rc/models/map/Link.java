@@ -7,7 +7,7 @@ import be.uantwerpen.rc.models.Cost;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "Links")
 @Table(name = "links", catalog = "\"robotDB_new\"")
 public class Link {
 

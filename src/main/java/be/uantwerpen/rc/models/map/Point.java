@@ -5,7 +5,7 @@ import be.uantwerpen.rc.models.Bot;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "Points")
 @Table(name = "points", catalog = "\"robotDB_new\"")
 public class Point {
 

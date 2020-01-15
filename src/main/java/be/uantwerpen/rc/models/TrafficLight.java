@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Traffic Light
  */
-@Entity
+@Entity(name = "TrafficLights")
 @Table(name = "tlights", catalog = "\"robotDB_new\"")
 public class TrafficLight
 {

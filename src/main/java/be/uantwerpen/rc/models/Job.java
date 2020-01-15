@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Job Data Class
  */
-@Entity
+@Entity(name = "Jobs")
 @Table(name = "jobs", catalog = "\"robotDB_new\"")
 public class Job
 {

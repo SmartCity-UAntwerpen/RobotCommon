@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Bot Data Class
  */
-@Entity
+@Entity(name = "Bots")
 @Table(name = "robots",catalog = "\"robotDB_new\"")
 public class Bot
 {
