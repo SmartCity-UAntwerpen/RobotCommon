@@ -37,22 +37,6 @@ public class Job
     private Bot bot;
 
     @Transient
-    //@ElementCollection(fetch = FetchType.EAGER)
-    //@OneToMany(cascade = CascadeType.PERSIST)
-    //@CollectionTable(name="drivedirections", joinColumns = @JoinColumn(name="id"))
-    /*@AttributeOverrides({
-            @AttributeOverride(name="dir", column=@Column(name="direction")),
-            @AttributeOverride(name="angle", column = @Column(name="directionAngle")),
-            @AttributeOverride(name="command", column = @Column(name="directionCommand"))
-    })*/
-    //@OneToMany(fetch = FetchType.EAGER)
-    /*@JoinTable(
-            name="drivedirections",
-            joinColumns={
-                    @JoinColumn(name="driveId", referencedColumnName="id")},
-            inverseJoinColumns={
-                    @JoinColumn(name="jobId", referencedColumnName="id")})*/
-/*    @OneToMany(fetch = FetchType.LAZY)*/
     @JoinColumn(name="driveId")
     private List<DriveDir> driveDirections = new LinkedList<>();
 

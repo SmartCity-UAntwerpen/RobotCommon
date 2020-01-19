@@ -7,7 +7,7 @@ import javax.persistence.*;
  *
  * @Author Riad on 17/12/2019
  */
-//@Embeddable
+
 @Entity
 @Table(name="drivedirs", catalog = "\"robotDB_new\"")
 public class DriveDir{
